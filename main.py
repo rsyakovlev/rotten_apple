@@ -42,7 +42,7 @@ def main(img_size,
                train_dataloader=train_dataloader,
                test_dataloader=test_dataloader)
 
-    torch.save(model_shufflenet.state_dict(), os.path.join("../", model_dir))
+    torch.save(model_shufflenet.state_dict(), os.path.join(".", model_dir))
 
 
 if __name__ == "__main__":
