@@ -1,5 +1,5 @@
 import torch
-import BinaryF1Score
+from torchmetrics.classification import BinaryF1Score
 
 
 def validate(model,
