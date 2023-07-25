@@ -72,7 +72,7 @@ def validate(model_dir, data_dir, img_size, batch_size, export_to_file):
 
     if export_to_file:
         row = f"Loss: {round(dataloader_loss, 4)}. Accuracy: {round(dataloader_accuracy, 4)}%. F1 score: {round(dataloader_f1_score, 4)}%"
-        with ("./validation_metrics.txt", "w") as file:
+        with open("./validation_metrics.txt", "w") as file:
             file.write(row)
 
 
