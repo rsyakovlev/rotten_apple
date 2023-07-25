@@ -36,8 +36,8 @@ def predict(model_dir, img_path, img_size, export_to_file):
         x = og_transform(image_obj)
         x = x.unsqueeze(0).detach().clone()
         output = model(x)
-        _, pred_class = torch.max(output, 1)
-        pred_class = pred_class.item()
+        _, pred_class_tensor = torch.max(output, 1)
+        pred_class = pred_class_tensor.item()
         preds.append(class_to_classname[pred_class])
         print(r'Predicted class for "{0}": {1}'.format(img_name, class_to_classname[pred_class]))
 
