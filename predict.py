@@ -37,8 +37,9 @@ def predict(model_dir, img_path, img_size, export_to_file):
         x = x.unsqueeze(0).detach().clone()
         output = model(x)
         _, pred_class = torch.max(output, 1)
+        pred_class = pred_class.item()
         preds.append(class_to_classname[pred_class])
-        print("Predicted class for {0}: {1}".format(img_name, class_to_classname[pred_class]))
+        print(r'Predicted class for "{0}": {1}'.format(img_name, class_to_classname[pred_class]))
 
     if export_to_file:
         with open(r"./predictions/preds.txt", "w") as file:
