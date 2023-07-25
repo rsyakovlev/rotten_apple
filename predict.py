@@ -47,7 +47,7 @@ def predict(model_dir, img_path, img_size, export_to_file):
             for i in range(n):
                 img_name = img_names[i]
                 pred = preds[i]
-                row = r"{0}: {1}\n".format(img_name, pred)
+                row = f"{img_name}: {pred}\n"
                 file.write(row)
 
 
