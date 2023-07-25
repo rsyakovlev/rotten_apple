@@ -9,8 +9,8 @@ import click
 
 
 @click.command()
-@click.option('-o', '--model_dir', default="./models/my_model")
-@click.option('-f', '--img_path', default="./apples/examples")
+@click.option('-m', '--model_dir', default="./models/my_model")
+@click.option('-i', '--img_path', default="./apples/examples")
 @click.option('-s', '--img_size', default=224)
 @click.option('-e', '--export_to_file', default=1)
 def predict(model_dir, img_path, img_size, export_to_file):
