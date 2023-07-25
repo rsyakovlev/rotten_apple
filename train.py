@@ -83,7 +83,7 @@ def train_epoch(model,
     return metrics
 
 
-def validate(model,
+def evaluate(model,
              criterion,
              dataloader):
 
@@ -153,7 +153,7 @@ def fit(model,
 
         print(f"Validation Epoch: {epoch}")
         with torch.no_grad():
-            validation_metrics = validate(model=model,
+            validation_metrics = evaluate(model=model,
                                           criterion=criterion,
                                           dataloader=test_dataloader)
         epoch_test_losses.append(validation_metrics['loss'])
@@ -178,7 +178,7 @@ def fit(model,
 @click.option('-l', '--lr', default=0.0001)
 @click.option('-i', '--sch_total_iters', default=5)
 @click.option('-e', '--epochs', default=10)
-@click.option('-o', '--model_dir', default="models/my_model")
+@click.option('-m', '--model_dir', default="models/my_model")
 def train(img_size,
           data_folder,
           train_batch_size,
