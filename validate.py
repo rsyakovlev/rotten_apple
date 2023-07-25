@@ -29,7 +29,8 @@ def get_test_data(data_dir="apples/test", img_size=224, batch_size=32):
 @click.option('-f', '--data_dir', default="apples/test")
 @click.option('-s', '--img_size', default=224)
 @click.option('-b', '--batch_size', default=32)
-def validate(model_dir, data_dir, img_size, batch_size):
+@click.option('-e', '--export_to_file', default=1)
+def validate(model_dir, data_dir, img_size, batch_size, export_to_file):
 
     model = torch_models.shufflenet_v2_x1_5(weights=None)
     model.load_state_dict(torch.load(model_dir))
@@ -68,6 +69,11 @@ def validate(model_dir, data_dir, img_size, batch_size):
     dataloader_f1_score = 100*BinaryF1Score()(torch.tensor(preds), torch.tensor(trues)).item()
 
     print(f"Loss: {round(dataloader_loss, 4)}. Accuracy: {round(dataloader_accuracy, 4)}%. F1 score: {round(dataloader_f1_score, 4)}%")
+
+    if export_to_file:
+        row = f"Loss: {round(dataloader_loss, 4)}. Accuracy: {round(dataloader_accuracy, 4)}%. F1 score: {round(dataloader_f1_score, 4)}%"
+        with ("./validation_metrics.txt", "w") as file:
+            file.write(row)
 
 
 if __name__ == "__main__":
