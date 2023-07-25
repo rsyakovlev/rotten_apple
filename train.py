@@ -83,7 +83,7 @@ def train_epoch(model,
     return metrics
 
 
-def validate(model,
+def evaluate(model,
              criterion,
              dataloader):
 
@@ -153,7 +153,7 @@ def fit(model,
 
         print(f"Validation Epoch: {epoch}")
         with torch.no_grad():
-            validation_metrics = validate(model=model,
+            validation_metrics = evaluate(model=model,
                                           criterion=criterion,
                                           dataloader=test_dataloader)
         epoch_test_losses.append(validation_metrics['loss'])
