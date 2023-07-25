@@ -178,7 +178,7 @@ def fit(model,
 @click.option('-l', '--lr', default=0.0001)
 @click.option('-i', '--sch_total_iters', default=5)
 @click.option('-e', '--epochs', default=10)
-@click.option('-o', '--model_dir', default="models/my_model")
+@click.option('-m', '--model_dir', default="models/my_model")
 def train(img_size,
           data_folder,
           train_batch_size,

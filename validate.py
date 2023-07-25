@@ -25,7 +25,7 @@ def get_test_data(data_dir="apples/test", img_size=224, batch_size=32):
 
 
 @click.command()
-@click.option('-o', '--model_dir', default="models/my_model")
+@click.option('-m', '--model_dir', default="models/my_model")
 @click.option('-f', '--data_dir', default="apples/test")
 @click.option('-s', '--img_size', default=224)
 @click.option('-b', '--batch_size', default=32)
