@@ -73,7 +73,7 @@ def success():
                 #     "prob3": prob_result[2],
                 # }
                 predictions = {
-                    "class1":class_result[0],
+                    "class1":class_result,
                     "prob1": 1,
                 }
             except Exception as e :
@@ -90,16 +90,22 @@ def success():
                 file.save(os.path.join(target_img, file.filename))
                 img_path = os.path.join(target_img, file.filename)
                 img = file.filename
-                class_result, prob_result = predict(img_path, model)
+                # class_result, prob_result = predict(img_path, model)
+                class_result = predict(model, img_path, img_size=224)
+                # predictions = {
+                #     "class1":class_result[0],
+                #     "class2":class_result[1],
+                #     "class3":class_result[2],
+                #     "prob1": prob_result[0],
+                #     "prob2": prob_result[1],
+                #     "prob3": prob_result[2],
+                # }
                 predictions = {
-                    "class1":class_result[0],
-                    "class2":class_result[1],
-                    "class3":class_result[2],
-                    "prob1": prob_result[0],
-                    "prob2": prob_result[1],
-                    "prob3": prob_result[2],
+                    "class1":class_result,
+                    "prob1": 1,
                 }
-            else:
+
+        else:
                 error = "Please upload images of jpg , jpeg and png extension only"
             if(len(error) == 0):
                 return  render_template('success.html', img=img, predictions=predictions)
