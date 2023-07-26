@@ -1,25 +1,24 @@
 import os
-import uuid
-import flask
-import urllib
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request
 
 from PIL import Image
 import torch
 import torchvision.models as torch_models
 import torchvision.transforms as transforms
 
-model_dir = 'models/my_model'
-model = torch_models.shufflenet_v2_x1_5(weights=None)
-model.load_state_dict(torch.load(model_dir))
-model.eval()
 
 app = Flask(__name__)
 
+def get_model(model_dir='models/my_model'):
+    model = torch_models.shufflenet_v2_x1_5(weights=None)
+    model.load_state_dict(torch.load(model_dir))
+    model.eval()
+    return model
 
-def allowed_file(filename):
-    allowed_formats = set(['jpg', 'jpeg', 'png'])
-    return '.' in filename and filename.rsplit('.', 1)[1] in allowed_formats
+#
+# def allowed_file(filename):
+#     allowed_formats = set(['jpg', 'jpeg', 'png'])
+#     return '.' in filename and filename.rsplit('.', 1)[1] in allowed_formats
 
 
 def predict(model, img_path, img_size=224):
@@ -41,64 +40,25 @@ def predict(model, img_path, img_size=224):
     return pred
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template("index.html")
+    return render_template("home.html")
 
 
-@app.route('/success', methods=['GET', 'POST'])
-def success():
-    error = ''
-    target_img = os.path.join(os.getcwd() , 'static/images')
+@app.route("/predict", methods = ['GET','POST'])
+def predict():
     if request.method == 'POST':
-        if(request.form):
-            link = request.form.get('link')
-            try :
-                resource = urllib.request.urlopen(link)
-                unique_filename = str(uuid.uuid4())
-                filename = unique_filename+".jpg"
-                img_path = os.path.join(target_img, filename)
-                output = open(img_path , "wb")
-                output.write(resource.read())
-                output.close()
-                img = filename
-                # class_result , prob_result = predict(img_path , model)
-                class_result = predict(model, img_path, img_size=224)
-                predictions = {
-                    "class1":class_result,
-                    "prob1": 1
-                }
-            except Exception as e :
-                print(str(e))
-                error = 'This image from this site is not accesible or inappropriate input'
-            if(len(error) == 0):
-                return render_template('success.html', img=img, predictions=predictions)
-            else:
-                return render_template('index.html', error=error)
+        file = request.files['file']
+        filename = file.filename
+        # file_path = os.path.join(r'C:/Users/nEW u/Flask/static/', filename)
+        img_path = os.path.join('./static', filename)
+        file.save(img_path)
+        model = get_model(model_dir='models/my_model')
+        pred = predict(model=model, img_path=img_path, img_size=224)
+        print(pred)
 
-        elif (request.files):
-            file = request.files['file']
-            if file and allowed_file(file.filename):
-                file.save(os.path.join(target_img, file.filename))
-                img_path = os.path.join(target_img, file.filename)
-                img = file.filename
-                # class_result, prob_result = predict(img_path, model)
-                class_result = predict(model, img_path, img_size=224)
-                predictions = {
-                    "class1":class_result,
-                    "prob1": 1
-                }
-
-            else:
-                error = "Please upload images of jpg , jpeg and png extension only"
-
-            if len(error) == 0:
-                return render_template('success.html', img=img, predictions=predictions)
-            else:
-                return render_template('index.html', error=error)
-    else:
-        return render_template('index.html')
+    return render_template('predict.html', product=pred, user_image=img_path)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
