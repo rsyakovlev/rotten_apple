@@ -29,7 +29,7 @@ def predict(model_dir, img_path, img_size, export_to_file):
     og_transform = transforms.Compose([transforms.Resize((img_size, img_size)),
                                        transforms.ToTensor()])
     preds = []
-    class_to_classname = {0: "fresh", 1: "rotten"}
+    classes = ["fresh", "rotten"]
 
     for img_name in img_names:
         image_obj = Image.open(os.path.join(img_path, img_name))
@@ -38,8 +38,8 @@ def predict(model_dir, img_path, img_size, export_to_file):
         output = model(x)
         _, pred_class_tensor = torch.max(output, 1)
         pred_class = pred_class_tensor.item()
-        preds.append(class_to_classname[pred_class])
-        print(r'Predicted class for "{0}": {1}'.format(img_name, class_to_classname[pred_class]))
+        preds.append(classes[pred_class])
+        print(r'Predicted class for "{0}": {1}'.format(img_name, classes[pred_class]))
 
     if export_to_file:
         with open(r"./predictions/preds.txt", "w") as file:
