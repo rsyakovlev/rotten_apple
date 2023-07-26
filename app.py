@@ -105,9 +105,10 @@ def success():
                     "prob1": 1
                 }
 
-        else:
+            else:
                 error = "Please upload images of jpg , jpeg and png extension only"
-            if(len(error) == 0):
+
+            if len(error) == 0:
                 return  render_template('success.html', img=img, predictions=predictions)
             else:
                 return render_template('index.html', error=error)
