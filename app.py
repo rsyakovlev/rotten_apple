@@ -45,8 +45,8 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/predict", methods = ['GET','POST'])
-def predict():
+@app.route("/prediction", methods = ['GET','POST'])
+def prediction():
     if request.method == 'POST':
         file = request.files['file']
         filename = file.filename
@@ -57,7 +57,7 @@ def predict():
         pred = predict(model=model, img_path=img_path, img_size=224)
         print(pred)
 
-    return render_template('predict.html', product=pred, user_image=img_path)
+    return render_template('prediction.html', pred=pred, user_image=img_path)
 
 
 if __name__ == "__main__":
