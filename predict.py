@@ -29,7 +29,7 @@ def predict(model_dir, img_path, img_size, export_to_file):
     og_transform = transforms.Compose([transforms.Resize((img_size, img_size)),
                                        transforms.ToTensor()])
     preds = []
-    class_to_classname = {0: "fresh", 1: "rotten"}
+    class_to_classname = ["fresh", "rotten"]
 
     for img_name in img_names:
         image_obj = Image.open(os.path.join(img_path, img_name))
