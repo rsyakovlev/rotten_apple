@@ -30,11 +30,6 @@ def predict(model, img_path, img_size=224):
     return pred
 
 
-def is_fileformat_allowed(filename):
-    allowed_formats = {'jpg', 'jpeg', 'png'}
-    return '.' in filename and filename.rsplit('.', 1)[1] in allowed_formats
-
-
 app = Flask(__name__)
 
 
@@ -49,9 +44,6 @@ def prediction():
     if request.method == 'POST':
         file = request.files['file']
         filename = file.filename
-        if not is_fileformat_allowed(filename):
-            raise Exception
-        # file_path = os.path.join(r'C:/Users/nEW u/Flask/static/', filename)
         img_path = os.path.join('./static', filename)
         file.save(img_path)
         model = get_model(model_dir='models/my_model')
