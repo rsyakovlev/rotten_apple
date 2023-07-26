@@ -74,7 +74,7 @@ def success():
                 # }
                 predictions = {
                     "class1":class_result,
-                    "prob1": 1,
+                    "prob1": 1
                 }
             except Exception as e :
                 print(str(e))
@@ -102,7 +102,7 @@ def success():
                 # }
                 predictions = {
                     "class1":class_result,
-                    "prob1": 1,
+                    "prob1": 1
                 }
 
         else:
