@@ -1,1 +1,0 @@
-Loss: 0.0041. Accuracy: 100.0%. F1 score: 100.0%

@@ -4,4 +4,6 @@ matplotlib
 torch
 torchvision
 torchmetrics
-PIL
+opencv-python
+click
+flask
