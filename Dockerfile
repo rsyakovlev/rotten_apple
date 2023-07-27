@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM pytorch:pytorch-latest
 RUN python -m pip install --upgrade pip
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 COPY requirements.txt requirements.txt
