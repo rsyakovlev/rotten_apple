@@ -1,6 +1,6 @@
 import os
 
-from PIL import Image
+import cv2
 import torch
 import torchvision.models as torch_models
 import torchvision.transforms as transforms
@@ -17,10 +17,15 @@ def get_model(model_dir='models/my_model'):
 
 def predict(model, img_path, img_size=224):
     class_to_classname = ["fresh", "rotten"]
-    og_transform = transforms.Compose([transforms.Resize((img_size, img_size)),
-                                       transforms.ToTensor()])
-    image_obj = Image.open(img_path)
-    x = og_transform(image_obj)
+    # og_transform = transforms.Compose([transforms.Resize((img_size, img_size)),
+    #                                    transforms.ToTensor()])
+    # image_obj = Image.open(img_path)
+    # x = og_transform(image_obj)
+    image_obj = cv2.imread(img_path)
+    image_obj = cv2.resize(src=image_obj, dsize=(img_size, img_size), interpolation=cv2.INTER_AREA)
+    image_obj = cv2.cvtColor(image_obj, cv2.COLOR_BGR2RGB)
+    transform = transforms.ToTensor()
+    x = transform(image_obj)
     x = x.unsqueeze(0).detach().clone()
     output = model(x)
     _, pred_class_tensor = torch.max(output, 1)

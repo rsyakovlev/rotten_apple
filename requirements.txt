@@ -4,4 +4,4 @@ matplotlib
 torch
 torchvision
 torchmetrics
-PIL
+opencv-python

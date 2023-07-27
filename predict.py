@@ -1,9 +1,9 @@
 import os
 
+import cv2
 import torch
 import torchvision.models as torch_models
 import torchvision.transforms as transforms
-from PIL import Image
 
 import click
 
@@ -26,14 +26,15 @@ def predict(model_dir, img_path, img_size, export_to_file):
     elif os.path.isdir(img_path):
         img_names = [file for file in os.listdir(img_path) if os.path.isfile(os.path.join(img_path, file))]
 
-    og_transform = transforms.Compose([transforms.Resize((img_size, img_size)),
-                                       transforms.ToTensor()])
     preds = []
     classes = ["fresh", "rotten"]
 
     for img_name in img_names:
-        image_obj = Image.open(os.path.join(img_path, img_name))
-        x = og_transform(image_obj)
+        image_obj = cv2.imread(os.path.join(img_path, img_name))
+        image_obj = cv2.resize(src=image_obj, dsize=(img_size, img_size), interpolation=cv2.INTER_AREA)
+        image_obj = cv2.cvtColor(image_obj, cv2.COLOR_BGR2RGB)
+        transform = transforms.ToTensor()
+        x = transform(image_obj)
         x = x.unsqueeze(0).detach().clone()
         output = model(x)
         _, pred_class_tensor = torch.max(output, 1)
