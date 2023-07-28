@@ -51,7 +51,7 @@ python predict.py
 ```
 
 
-## Приложение:
+## Web-приложение:
 
 Пример использования в shell:
 ```
@@ -59,12 +59,7 @@ python app/app.py
 ```
 
 Пример использования в Docker:
-Собрать образ:
 ```
-docker build -t rotten_apple .
-```
-
-Запустить:
-```
-docker run -it -p 5000:5000 rotten_apple
+docker build -t rotten_apple .  # собрать образ
+docker run -it -p 5000:5000 rotten_apple  # запустить контейнер
 ```
