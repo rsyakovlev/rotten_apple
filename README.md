@@ -1,8 +1,10 @@
 # Классификация порченных яблок
 
-В данном проекте была решена задача классификации порченных яблок с помощью машинного обучения.<br>
-Источник данных: https://www.kaggle.com/datasets/sriramr/fruits-fresh-and-rotten-for-classification <br>
-Ход работы и выбор финальной модели показаны в блокноте ./notebook/Rotten Apples Classification Task.ipynb. <br>
+В данном проекте была решена задача классификации порченных яблок с помощью машинного обучения.
+
+Источник данных: https://www.kaggle.com/datasets/sriramr/fruits-fresh-and-rotten-for-classification
+
+Ход работы и выбор финальной модели показаны в блокноте ./notebook/Rotten Apples Classification Task.ipynb.
 
 ## Обучение
 Обучение модели производится с помощью скрипта train.py.
