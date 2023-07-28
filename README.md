@@ -23,11 +23,11 @@ python train.py
 
 ## Валидация
 Аргументы:
-* -m / --model_dir / default="models/my_model")
-* -f /--data_dir / default="apples/test")
-* -s / --img_size / default=224)
-* -b / --batch_size / default=32)
-* -e / --export_to_file / default=1)
+* -m (--model_dir). default="models/my_model"
+* -f (--data_dir). default="apples/test"
+* -s (--img_size). default=224
+* -b (--batch_size). default=32
+* -e (--export_to_file). default=1
 
 Пример:
 ```
