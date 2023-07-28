@@ -5,46 +5,64 @@
 Ход работы и выбор финальной модели показаны в блокноте ./notebook/Rotten Apples Classification Task.ipynb. <br>
 
 ## Обучение
-Обучение производится с помощью скрипта train.py.
+Обучение модели производится с помощью скрипта train.py.
 Аргументы:
-@click.option('-s', '--img_size', default=224)
-@click.option('-f', '--data_folder', default="apples")
-@click.option('-b', '--train_batch_size', default=8)
-@click.option('-l', '--lr', default=0.0001)
-@click.option('-i', '--sch_total_iters', default=5)
-@click.option('-e', '--epochs', default=10)
-@click.option('-m', '--model_dir', default="models/my_model")
+* -s (default=224)
+* -f (default="apples")
+* -b (default=8)
+* -l (default=0.0001)
+* -i (default=5)
+* -e (default=10)
+* -m (default="models/my_model")
 
-Пример:
+Пример использования в shell:
 ```
 python train.py
 ```
 
 
 ## Валидация
+Валидация модели производится с помощью скрипта validate.py.
 Аргументы:
-* -m (--model_dir). default="models/my_model"
-* -f (--data_dir). default="apples/test"
-* -s (--img_size). default=224
-* -b (--batch_size). default=32
-* -e (--export_to_file). default=1
+* -m (default="models/my_model")
+* -f (default="apples/test")
+* -s (default=224)
+* -b (default=32)
+* -e (default=1)
 
-Пример:
+Пример использования в shell:
 ```
 python validate.py -m "models/my_model" -f "apples/test"
 ```
 
 ## Предсказание
-Сделать предсказание для изображения или директории с изображениями
+Предсказание моделью производится с помощью скрипта validate.py. Сделать предсказание можно для изображения или для директории с изображениями.
+Аргументы:
+* -m (default="./models/my_model")
+* -i (default="./apples/examples")
+* -s (default=224)
+* -e (default=1)
+
+Пример использования в shell:
 ```
 python predict.py
 ```
 
 
-Запустить приложение:
+## Приложение:
 
-cmd
-
+Пример использования в shell:
+```
 python app/app.py
+```
 
-Dockerfile
+Пример использования в Docker:
+Собрать образ:
+```
+docker build -t rotten_apple .
+```
+
+Запустить:
+```
+docker run -it -p 5000:5000 rotten_apple
+```
