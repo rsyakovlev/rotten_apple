@@ -11,7 +11,7 @@ from torchmetrics.classification import BinaryF1Score
 import click
 
 
-def get_test_data(data_dir="apples/test", img_size=224, batch_size=32):
+def get_test_data(data_dir="data/test", img_size=224, batch_size=32):
 
     og_transform = transforms.Compose([transforms.Resize((img_size, img_size)),
                                        transforms.ToTensor()])
@@ -26,7 +26,7 @@ def get_test_data(data_dir="apples/test", img_size=224, batch_size=32):
 
 @click.command()
 @click.option('-m', '--model_dir', default="models/my_model")
-@click.option('-f', '--data_dir', default="apples/test")
+@click.option('-f', '--data_dir', default="data/test")
 @click.option('-s', '--img_size', default=224)
 @click.option('-b', '--batch_size', default=32)
 @click.option('-e', '--export_to_file', default=1)
