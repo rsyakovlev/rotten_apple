@@ -6,6 +6,7 @@
 
 Ход работы и выбор финальной модели показаны в блокноте ./notebook/Rotten Apples Classification Task.ipynb.
 
+
 ## Обучение
 Обучение модели производится с помощью скрипта train.py.
 Аргументы:
@@ -37,6 +38,7 @@ python train.py
 python validate.py -m "models/my_model" -f "apples/test"
 ```
 
+
 ## Предсказание
 Предсказание моделью производится с помощью скрипта validate.py. Сделать предсказание можно для изображения или для директории с изображениями.
 Аргументы:
@@ -60,6 +62,6 @@ python app/app.py
 
 Пример использования в Docker:
 ```
-docker build -t rotten_apple .  # собрать образ
-docker run -it -p 5000:5000 rotten_apple  # запустить контейнер
+docker build -t rotten_apple .
+docker run -it -p 5000:5000 rotten_apple
 ```
