@@ -29,6 +29,7 @@
 Помимо этого была использована архитектура свёрточных нейронных сетей ShuffleNet. <br>
 Предобученная модель shufflenet_v2_x1_5 из библиотеки torchvision была дообучена на обучающей выборке в рамках текущей задачи. <br>
 Благодаря использованию ShuffleNet удалось добиться 100% Accuracy на тестовой выборке. <br>
+
 Готовая к использованию финальная модель сохранена в директории /models.
 
 
@@ -46,7 +47,7 @@
 
 Пример использования в shell:
 ```
-python train.py
+python train.py -f "apples" -b 8 -l 8 -i 5 -e 10 -m "models/my_model"
 ```
 
 
@@ -77,7 +78,7 @@ python validate.py -m "models/my_model" -f "apples/test"
 
 Пример использования в shell:
 ```
-python predict.py
+python predict.py -m "./models/my_model" -i "./apples/examples"
 ```
 
 
